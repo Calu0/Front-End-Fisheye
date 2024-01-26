@@ -1,76 +1,242 @@
 #contact_modal {
-    display: none;
+  display: none;
+}
+
+main {
+  margin: 0 100px;
+}
+
+h2 {
+  margin: 0;
+  color: #901c1c;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-overflow: ellipsis;
 }
 
 .photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+  background-color: #fafafa;
+  height: 300px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.photograph-header h1 {
+  font-size: 64px;
+  font-weight: 400;
+  color: #d3573c;
+  margin: 0;
+}
+
+.photographer_location {
+  color: #901c1c;
+  font-size: 24px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.photographer_tagline {
+  font-size: 18px;
+  color: #525252;
+}
+
+.photographer_portrait {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.sort p {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sort_toggle {
+  position: relative;
+}
+
+.sort_options {
+  display: none;
+}
+
+.sort_button {
+  width: 170px;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  font-style: normal;
+  display: flex;
+  justify-content: start;
+  border: none;
+  padding-left: 17px;
+  border-radius: 5px 5px 0px 0px;
+  background: #901c1c;
+  cursor: pointer;
+}
+
+.show_sort_options {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+  position: absolute;
+  border-radius: 0px 0px 5px 5px;
+  background: #901c1c;
+  z-index: 50;
+}
+
+.show_sort_options li {
+  color: #fff;
+  border-top: 2px solid #fff;
+  width: 80%;
+  z-index: 50;
+  margin: auto;
+  padding: 10px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.images-catalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.photo_card {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.photo_card_img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.photo_card_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.photo_card_likes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.photo_card_likes_number {
+  color: #901c1c;
+  font-size: 24px;
+}
+
+.photo_card_likes img {
+  width: 21px;
+  height: 24px;
+}
+
+.price_tag {
+  position: fixed;
+  bottom: 0;
+  right: 36px;
+  padding: 15px 36px 15px 36px;
+  background: #db8876;
+  display: flex;
+  gap: 65px;
+  align-items: center;
+  border-radius: 5px 5px 0px 0px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.likes_container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
 }
 
 .modal header {
-    justify-content: space-between;
-    width: 100%;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .modal header img {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
 }
 
 form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 form label {
-    color: #312E2E;
-    font-size: 36px;
+  color: #312e2e;
+  font-size: 36px;
 }
 
 form div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: self-start;
-    margin-bottom: 26px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
 }
 
 form input {
-    width: 100%;
-    height: 68px;
-    border: none;
-    border-radius: 5px;
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
 }
