@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
@@ -10,58 +10,97 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header>
-      <a href="/">
-        <img src="assets/images/logo.png" class="logo" />
-      </a>
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
-          Contactez-moi
-        </button>
-      </div>
-      <div class="sort">
-        <p>Trier par</p>
-        <div class="sort_toggle">
-          <button class="sort_button">Date</button>
-          <div class="sort_options">
-            <li value="popularite">Popularité</li>
-            <li value="date">Date</li>
-            <li value="titre">Titre</li>
+    <div id="main_body">
+      <header>
+        <a href="/">
+          <img src="assets/images/logo.png" class="logo" alt="logo"/>
+        </a>
+      </header>
+      <main id="main">
+        <div class="photograph-header">
+          <button class="contact_button" aria-label="Ouvrir le formulaire de contact">
+            Contactez-moi
+          </button>
+        </div>
+        <div class="sort">
+          <p>Trier par</p>
+          <div class="sort_toggle">
+            <button class="sort_button" aria-label="Bouton pour trier">Date</button>
+            <div class="sort_options" aria-label="Options de tri">
+              <li value="popularite">Popularité</li>
+              <li value="date">Date</li>
+              <li value="titre">Titre</li>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="images-catalog"></div>
-      <div class="price_tag">
-        <div class="likes_container">
-          <div class="total_likes"></div>
-          <img
-            class="heart_icon"
-            src="../../assets/icons/heart-black.svg"
-            alt="likes" />
-        </div>
-        <div class="price"></div>
-      </div>
-    </main>
-    <div id="contact_modal">
-      <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
-          <div>
-            <label>Prénom</label>
-            <input />
+        <section class="images-catalog" aria-label="catalogue des medias"></section>
+        <aside class="price_tag" aria-label="Contient le nombre total de like et le prix du photographe">
+          <div class="likes_container">
+            <div class="total_likes"></div>
+            <img
+              class="heart_icon"
+              src="../../assets/icons/heart-black.svg"
+              alt="likes" />
           </div>
-          <button class="contact_button">Envoyer</button>
-        </form>
-      </div>
+          <div class="price"></div>
+        </asidex>
+        <div class="lightbox"> 
+          <button class="lightbox_prev lightbox_dir" aria-label="Bouton qui permet de revenir à l'image précédente">
+            <img
+              src="./assets/icons/arrow.svg"
+              alt="arrow_prev"
+              class="arrow_prev arrow" />
+          </button>
+          <div class="lightbox_col_center">
+            <img class="lightbox_image" style="display: none" alt="image-lightbox" />
+            <video class="lightbox_video" style="display: none" controls>
+              Your browser does not support the video tag.
+            </video>
+            <p class="lightbox_image_title"></p>
+          </div>
+          <div class="lightbox_col_right">
+            <button class="lightbox_close" aria-label="Bouton qui permet de fermer la lightbox">
+              <img
+                src="./assets/icons/close-modal.svg"
+                alt="close modal"
+                class="close_modal" />
+            </button>
+
+            <button class="lightbox_next lightbox_dir" aria-label="Bouton qui permet d'ammer à l'image suivante">
+              <img
+                src="./assets/icons/arrow.svg"
+                alt="arrow_next "
+                class="arrow_next arrow" />
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
+<section class="modal_container" id="modal_container">
+    <div class="modal" id="contact_modal">
+      <div id="title_modal">
+        <h2>Contactez-moi<span class="photographer_name"></span></h2>
+        <img src="assets/icons/close.svg"  id="close_modal_btn" alt="close_btn"/>
+      </div>
+      <form id="contact_form" >
+        <div>
+          <label for="firstname">Prénom</label>
+          <input required name="firstname" id="firstname" type="text" />
+          <label for="lastname">Nom</label>
+          <input required name="lastname" type="text" id="lastname"/>
+          <label for="email">Email</label>
+          <input required name="email" type="email" id="email" />
+          <label for="message">Votre message</label>
+          <textarea required name="message"  id="message"> </textarea>
+        </div>
+        <button class="contact_button" onclick="submitForm()" aria-label="Bouton qui permet d'envoyer les données du formulaire">Envoyer</button>
+      </form>
+    </div>
+  </section>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/templates/image.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/utils/sort.js"></script>
+    <script src="/scripts/utils/lightbox.js"></script>
   </body>
 </html>

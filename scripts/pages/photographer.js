@@ -17,7 +17,7 @@ async function getPhotographer() {
 
 async function displayBanner(photographer) {
 
-    console.log(photographer);
+
     const photographerHeader = document.querySelector(".photograph-header");
     const headerBtn = document.querySelector(".contact_button");
 
@@ -35,6 +35,7 @@ async function displayBanner(photographer) {
     tagline.textContent = photographer.tagline;
     const portrait = document.createElement('img');
     portrait.setAttribute("class", "photographer_portrait");
+    portrait.setAttribute("alt", photographer.name);
     portrait.setAttribute("src", `../../assets/photographers/${photographer.portrait}`);
 
     divTitle.appendChild(h1);
@@ -88,11 +89,13 @@ function optionSelected(event) {
     sortOptions.classList.remove("show_sort_options");
 }
 
+
 // Definition de l'option par défaut et mise à jour des options
 const sortBtn = document.querySelector(".sort_button");
 const defaultOption = "Date";
 sortBtn.textContent = defaultOption;
 updateOptions(defaultOption);
+
 
 // Gestionnaire d'événements pour le bouton de tri
 const sortOptions = document.querySelector(".sort_options");
@@ -104,8 +107,6 @@ sortBtn.addEventListener("click", () => {
 // récupère les images filtrés par id du photographer
 
 async function getImages() {
-
-
     const response = await fetch("../../data/photographers.json");
     const data = await response.json();
     const images = data.media;
@@ -115,50 +116,40 @@ async function getImages() {
     })
 }
 
-// display images 
-
-async function displayImages(photographer) {
-
-    const imagesSection = document.querySelector(".images-catalog");
-    photographer.forEach((image) => {
-        const mediaModel = mediaTemplate(image);
-        const mediaDOM = mediaModel.getMediaDOM();
-        imagesSection.appendChild(mediaDOM);
-    });
-
-}
 
 // display likes and price in price_tag
 
 function displayLikesAndPrice(photographerImages) {
-    const price_tag = document.querySelector(".price_tag");
+
     const likes = document.querySelector(".total_likes");
     const price = document.querySelector(".price");
-
-
-    console.log(photographerImages.map((image) => image.likes));
 
     likes.textContent = photographerImages.map((image) => image.likes).reduce((a, b) => a + b, 0);
     price.textContent = photographerImages.map((image) => image.price).reduce((a, b) => a + b, 0) + "€ /jour";
 
 }
 
-// add like on click on heart icon 
 
-function addLike() {
-    const heartIcon = document.querySelectorAll(".heart_icon");
-    const likes = document.querySelector(".photo_card_likes_number").textContent;
+function addLikesToImage() {
+    const heartIcons = document.querySelectorAll(".heart_icon")
 
-    heartIcon.forEach((icon) => {
+    heartIcons.forEach(icon => {
         icon.addEventListener("click", () => {
+            // Mise à jour du nombre de likes pour l'image sélectionnée
+            const imageId = icon.getAttribute("data-id");
+            const likesDOM = document.querySelector(`.photo_card_likes_number[data-id="${imageId}"]`);
+            let likes = likesDOM.textContent;
             likes++;
-            console.log(likes);
+            likesDOM.textContent = likes;
+
+            // Mise à jour du total des likes
+            const totalLikesDOM = document.querySelector(".total_likes");
+            let totalLikes = totalLikesDOM.textContent;
+            totalLikes++;
+            totalLikesDOM.textContent = totalLikes;
         });
     });
-
 }
-
-
 
 
 // init 
@@ -167,14 +158,14 @@ async function init() {
 
 
     const { photographer } = await getPhotographer();
-
     const { photographerImages } = await getImages();
 
     displayBanner(photographer);
-    displayImages(photographerImages);
+    displaySortedImages(sortByDate);
     displayLikesAndPrice(photographerImages);
 
-
+    addModalOpenEvent();
+    addModalCloseEvent();
 }
 
 init()

@@ -13,6 +13,7 @@ function photographerTemplate(data) {
         redirect.setAttribute("class", "photographer_card_link")
         const img = document.createElement('img');
         img.setAttribute("src", picture)
+        img.setAttribute("alt", name);
         const h2 = document.createElement('h2');
         h2.textContent = name;
         const div = document.createElement('div');

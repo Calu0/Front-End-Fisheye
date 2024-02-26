@@ -29,12 +29,12 @@ function sortByTitle(photographerImages) {
         let titleB = b.title.toUpperCase();
 
         if (titleA < titleB) {
-            return -1; // a vient avant b
+            return -1;
         }
         if (titleA > titleB) {
-            return 1; // a vient après b
+            return 1;
         }
-        return 0; // a et b sont égaux
+        return 0;
     });
 }
 
@@ -55,6 +55,9 @@ function clearAndDisplayImages(images) {
         const mediaDOM = mediaModel.getMediaDOM();
         imagesSection.appendChild(mediaDOM);
     });
+
+    addLikesToImage();
+    displayLightbox();
 }
 
 
