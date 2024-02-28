@@ -117,7 +117,7 @@ async function getImages() {
 }
 
 
-// display likes and price in price_tag
+// affiche les likes et le prix total dans la section price_tag
 
 function displayLikesAndPrice(photographerImages) {
 

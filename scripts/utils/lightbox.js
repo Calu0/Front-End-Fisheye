@@ -10,7 +10,7 @@ function displayLightbox() {
 
     let currentIndex = 0;
 
-    // allow to navigate between medias with arrow keys or close the lightbox with escape key
+    // Permet de naviguer dans la lightbox avec les flèches du clavier
 
     function handleArrowKey(e) {
         if (e.key === 'ArrowRight') {
@@ -32,7 +32,7 @@ function displayLightbox() {
         updateLightboxMedia(medias[currentIndex]);
     }
 
-    // Update the lightbox media with the given media 
+    // Update la lightbox avec le média donné
     function updateLightboxMedia(media) {
         lightboxTitle.textContent = media.getAttribute("data-title");
         if (media.tagName === 'IMG') {
@@ -49,7 +49,7 @@ function displayLightbox() {
         }
     }
 
-    // Add event listeners to each media to open the lightbox on clicks or keydowns enter
+    // Ajoute un écouteur d'événement sur chaque média pour ouvrir la lightbox
 
     medias.forEach((media, index) => {
         media.addEventListener('click', () => {

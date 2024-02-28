@@ -14,7 +14,7 @@ function closeModal() {
 }
 
 
-// allow to close modal with escape key
+// permet de fermer la modale avec la touche echap
 function handleEscapeKey(e) {
     if (e.key === 'Escape') {
         closeModal();
@@ -42,7 +42,7 @@ function submitForm() {
 function addModalOpenEvent() {
     const contactButton = document.querySelector(".contact_button");
     contactButton.addEventListener("click", () => {
-        // Appelle getPhotographer pour obtenir les informations du photographe
+
         getPhotographer().then(({ photographer }) => {
             displayModal(photographer.name);
         });
