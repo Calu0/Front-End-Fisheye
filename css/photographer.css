@@ -66,6 +66,7 @@ h2 {
 
 .sort_options {
   display: none;
+  list-style: none;
 }
 
 .sort_button {

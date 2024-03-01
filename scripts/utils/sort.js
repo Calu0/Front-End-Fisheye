@@ -1,4 +1,8 @@
-function sortByPopularity(photographerImages) {
+import { getImages, addLikesToImage, } from '../pages/photographer.js';
+import { mediaTemplate } from '../templates/image.js';
+import { displayLightbox } from './lightbox.js';
+
+export function sortByPopularity(photographerImages) {
     return photographerImages.sort((a, b) => {
         if (a.likes < b.likes) {
             return 1;
@@ -10,7 +14,7 @@ function sortByPopularity(photographerImages) {
     });
 }
 
-function sortByDate(photographerImages) {
+export function sortByDate(photographerImages) {
     return photographerImages.sort((a, b) => {
         if (a.date > b.date) {
             return -1;
@@ -23,7 +27,7 @@ function sortByDate(photographerImages) {
 }
 
 
-function sortByTitle(photographerImages) {
+export function sortByTitle(photographerImages) {
     return photographerImages.sort((a, b) => {
         let titleA = a.title.toUpperCase();
         let titleB = b.title.toUpperCase();
@@ -38,7 +42,7 @@ function sortByTitle(photographerImages) {
     });
 }
 
-async function displaySortedImages(sortFunction) {
+export async function displaySortedImages(sortFunction) {
     let { photographerImages } = await getImages();
 
     photographerImages = sortFunction(photographerImages);

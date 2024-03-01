@@ -1,10 +1,12 @@
+import { displaySortedImages, sortByDate, sortByPopularity, sortByTitle } from "../utils/sort.js";
+import { addModalOpenEvent, addModalCloseEvent } from "../utils/contactForm.js";
 
 let photographerId = new URLSearchParams(window.location.search).get("id");
 
 
 // Récupère les datas du photographer 
 
-async function getPhotographer() {
+export async function getPhotographer() {
 
     const response = await fetch("../../data/photographers.json");
     const data = await response.json();
@@ -55,38 +57,41 @@ function updateOptions(selectedText) {
     const allOptions = ["Popularité", "Date", "Titre"];
     const sortOptions = document.querySelector(".sort_options");
 
-    // supprime la liste des options  
+    // Supprime la liste des options existantes
     sortOptions.innerHTML = '';
 
-
-    // recrée la liste des options de tri en omettant l'option sélectionnée 
-    allOptions.map(option => {
+    // Ajoute de nouvelles options en omettant celle sélectionnée
+    allOptions.forEach(option => {
         if (option !== selectedText) {
             const li = document.createElement("li");
             li.textContent = option;
+            li.setAttribute("tabindex", "0");
+            li.setAttribute("class", "sort_option"); // Assurez-vous que la classe est correcte
             li.addEventListener("click", optionSelected);
+            li.addEventListener("keydown", optionSelected);
             sortOptions.appendChild(li);
         }
     });
 }
 
+
 // Gestionnaire d'événements pour les options sélectionnées
 function optionSelected(event) {
-    const selectedText = event.target.textContent;
-    sortBtn.textContent = selectedText;  // Met à jour le texte du bouton de tri
+    if (event.type === "click" || (event.type === "keydown" && event.key === "Enter")) {
+        const selectedText = event.target.textContent;
+        sortBtn.textContent = selectedText;
+        updateOptions(selectedText);
 
-    updateOptions(selectedText);     // Met à jour la liste des options de tri
+        if (selectedText === "Popularité") {
+            displaySortedImages(sortByPopularity);
+        } else if (selectedText === "Date") {
+            displaySortedImages(sortByDate);
+        } else if (selectedText === "Titre") {
+            displaySortedImages(sortByTitle);
+        }
 
-    // Tri des images en fonction de l'option sélectionnée
-    if (selectedText === "Popularité") {
-        displaySortedImages(sortByPopularity);
-    } else if (selectedText === "Date") {
-        displaySortedImages(sortByDate);
-    } else if (selectedText === "Titre") {
-        displaySortedImages(sortByTitle);
+        sortOptions.classList.remove("show_sort_options");
     }
-
-    sortOptions.classList.remove("show_sort_options");
 }
 
 
@@ -106,7 +111,7 @@ sortBtn.addEventListener("click", () => {
 
 // récupère les images filtrés par id du photographer
 
-async function getImages() {
+export async function getImages() {
     const response = await fetch("../../data/photographers.json");
     const data = await response.json();
     const images = data.media;
@@ -130,7 +135,7 @@ function displayLikesAndPrice(photographerImages) {
 }
 
 
-function addLikesToImage() {
+export function addLikesToImage() {
     const heartIcons = document.querySelectorAll(".heart_icon")
 
     heartIcons.forEach(icon => {
@@ -148,6 +153,14 @@ function addLikesToImage() {
             totalLikes++;
             totalLikesDOM.textContent = totalLikes;
         });
+
+        icon.setAttribute("tabindex", "0");
+        icon.setAttribute("aria-label", "Ajouter un like");
+        icon.addEventListener("keydown", (e) => {
+            if (e.key === 'Enter') {
+                icon.click();
+            }
+        });
     });
 }
 
@@ -155,7 +168,6 @@ function addLikesToImage() {
 // init 
 
 async function init() {
-
 
     const { photographer } = await getPhotographer();
     const { photographerImages } = await getImages();
@@ -169,3 +181,4 @@ async function init() {
 }
 
 init()
+

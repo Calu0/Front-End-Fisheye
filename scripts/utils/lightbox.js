@@ -1,4 +1,4 @@
-function displayLightbox() {
+export function displayLightbox() {
     const medias = Array.from(document.querySelectorAll(".photo_card_img"));
     const lightboxElement = document.querySelector(".lightbox");
     const lightboxImage = lightboxElement.querySelector(".lightbox_image");
